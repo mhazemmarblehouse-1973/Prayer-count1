@@ -24,6 +24,10 @@ jobs:
 
       - name: Build debug APK
         run: |
+          mkdir -p _project
+          for z in *.zip; do
+            [ -f "$z" ] && unzip -oq "$z" -d _project
+          done
           FILE=$(find . -name settings.gradle.kts -not -path './.git/*' | head -1)
           if [ -z "$FILE" ]; then
             echo "settings.gradle.kts not found. Files in repo:"
